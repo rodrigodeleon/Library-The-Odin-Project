@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Library</title>
+    <script src="javascript.js" defer></script>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div id="main">The Odin Project Library</div>
+    <button id="btnNewBook">New Book</button>
+
+    <form onsubmit="return false" id="myForm" method="post" style="visibility: hidden">
+      <div id="formRow">
+        <fieldset>
+          <legend>New Book</legend>
+          <label for="name">Book Name: </label>
+          <input
+            name="name"
+            type="text"
+            required
+            placeholder="Ex: Lord of the Rings"
+          />
+          <label for="author">Author: </label>
+          <input name="author" type="text" required placeholder="Ex: Tolkien" />
+          <label for="pageCount">Page Count: </label>
+          <input
+            name="pageCount"
+            type="number"
+            required
+            placeholder="Ex: 523"
+          />
+          <button id="addBook">Add Book</button>
+        </fieldset>
+      </div>
+    </form>
+    <table id="displayLibrary"></table>
+  </body>
+</html>
