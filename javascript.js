@@ -6,15 +6,17 @@ let bookForm = document.querySelector("#myForm");
 let btnAddBook = document.querySelector("#addBook");
 let readButtons;
 
-function Book(name, author, pagecount) {
-  if (myLibrary.length == 0) this.index = 1;
-  else {
-    this.index = myLibrary[myLibrary.length-1].index + 1;
+class Book {
+  constructor(name, author, pagecount) {
+    if (myLibrary.length == 0) this.index = 1;
+    else {
+      this.index = myLibrary[myLibrary.length - 1].index + 1;
+    }
+    this.name = name;
+    this.author = author;
+    this.pagecount = pagecount;
+    this.read = false;
   }
-  this.name = name;
-  this.author = author;
-  this.pagecount = pagecount;
-  this.read = false;
 }
 
 function newBook() {
