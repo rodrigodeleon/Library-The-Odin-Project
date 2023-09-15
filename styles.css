@@ -14,3 +14,11 @@ table, th, td, th {
     text-align: center;
 
 }
+
+input:valid{
+    border: green 2px solid;
+}
+
+
+input:invalid{
+}

@@ -1,9 +1,9 @@
 let myLibrary = [];
-let main = document.querySelector("#main");
-let libraryDisplay = document.querySelector("#displayLibrary");
-let btnNewBook = document.querySelector("#btnNewBook");
-let bookForm = document.querySelector("#myForm");
-let btnAddBook = document.querySelector("#addBook");
+let main = document.querySelector('#main');
+let libraryDisplay = document.querySelector('#displayLibrary');
+let btnNewBook = document.querySelector('#btnNewBook');
+let bookForm = document.querySelector('#myForm');
+let btnAddBook = document.querySelector('#addBook');
 let readButtons;
 
 class Book {
@@ -20,7 +20,7 @@ class Book {
 }
 
 function newBook() {
-  bookForm.style.visibility = "visible";
+  bookForm.style.visibility = 'visible';
 }
 
 function addBookToLibrary(name, author, pageCount) {
@@ -50,7 +50,7 @@ function deleteBook(bookNumber) {
 }
 
 function printLibrary() {
-  libraryDisplay.innerHTML = "";
+  libraryDisplay.innerHTML = '';
   let tableHeader = libraryDisplay.insertRow(0);
   let indexHeader = tableHeader.insertCell(0);
   let nameHeader = tableHeader.insertCell(1);
@@ -58,12 +58,12 @@ function printLibrary() {
   let pageCountHeader = tableHeader.insertCell(3);
   let readHeader = tableHeader.insertCell(4);
   let actionsHeader = tableHeader.insertCell(5);
-  indexHeader.innerHTML = "Book Number";
-  nameHeader.innerHTML = "Book Name";
-  authorHeader.innerHTML = "Author Name";
-  pageCountHeader.innerHTML = "Book Pages";
-  readHeader.innerHTML = "Already Read?";
-  actionsHeader.innerHTML = "Actions";
+  indexHeader.innerHTML = 'Book Number';
+  nameHeader.innerHTML = 'Book Name';
+  authorHeader.innerHTML = 'Author Name';
+  pageCountHeader.innerHTML = 'Book Pages';
+  readHeader.innerHTML = 'Already Read?';
+  actionsHeader.innerHTML = 'Actions';
 
   myLibrary.forEach((element) => {
     let tableRow = libraryDisplay.insertRow();
@@ -78,43 +78,60 @@ function printLibrary() {
     cellAuthor.innerHTML = element.author;
     cellPageCount.innerHTML = element.pagecount;
 
-    let readButton = document.createElement("Button");
-    readButton.classList = "readButton";
+    let readButton = document.createElement('Button');
+    readButton.classList = 'readButton';
     readButton.id = element.index;
     if (element.read) {
-      cellRead.innerHTML = "Yes";
-      readButton.innerHTML = "Mark as NOT READ";
+      cellRead.innerHTML = 'Yes';
+      readButton.innerHTML = 'Mark as NOT READ';
     } else if (!element.read) {
-      cellRead.innerHTML = "No";
-      readButton.innerHTML = "Mark as READ";
+      cellRead.innerHTML = 'No';
+      readButton.innerHTML = 'Mark as READ';
     }
 
-    let deleteButton = document.createElement("Button");
-    deleteButton.classList = "deleteButton";
+    let deleteButton = document.createElement('Button');
+    deleteButton.classList = 'deleteButton';
     deleteButton.id = element.index;
-    deleteButton.innerHTML = "Delete Book";
+    deleteButton.innerHTML = 'Delete Book';
     cellActions.appendChild(readButton);
     cellActions.appendChild(deleteButton);
 
     console.table(element);
   });
-  readButtons = document.querySelectorAll(".readButton");
+  readButtons = document.querySelectorAll('.readButton');
   readButtons.forEach((button) => {
-    button.addEventListener("click", () => markAsRead(button.id));
+    button.addEventListener('click', () => markAsRead(button.id));
   });
 
-  deleteButtons = document.querySelectorAll(".deleteButton");
+  deleteButtons = document.querySelectorAll('.deleteButton');
   deleteButtons.forEach((button) => {
-    button.addEventListener("click", () => deleteBook(button.id));
+    button.addEventListener('click', () => deleteBook(button.id));
   });
   console.table(myLibrary);
 }
 
-btnNewBook.addEventListener("click", () => newBook());
-btnAddBook.addEventListener("click", () =>
-  addBookToLibrary(
-    bookForm.name.value,
-    bookForm.author.value,
-    bookForm.pageCount.value
-  )
-);
+function checkFormValidity() {
+  if (
+    bookForm.name.validationMessage === '' &&
+    bookForm.pageCount.validationMessage === '' &&
+    bookForm.author.validationMessage === ''
+  ) {
+    return true;
+  } else {
+    console.log(bookForm.name.validationMessage);
+    console.log(bookForm.pageCount.validationMessage);
+    console.log(bookForm.author.validationMessage);
+
+    return false;
+  }
+}
+btnNewBook.addEventListener('click', () => newBook());
+btnAddBook.addEventListener('click', () => {
+  if (bookForm.checkValidity()) {
+    addBookToLibrary(
+      bookForm.name.value,
+      bookForm.author.value,
+      bookForm.pageCount.value
+    );
+  }
+});
